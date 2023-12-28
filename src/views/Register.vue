@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center items-center mt-12">
-      <div class="w-full max-w-xs">
+      <div class="w-full max-w-[500px]">
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
             <div class="identity-input mb-4">

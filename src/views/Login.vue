@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-center items-center mt-32">
-      <div class="w-full max-w-xs">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div class="w-full max-w-[400px]">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="login">
           <div class="identity-input mb-4">
             <label
               for="identity"
@@ -57,7 +57,7 @@
           </div>
           dont have an account?
           <router-link
-              class="inline-block align-baseline font-bold text-lg text-blue-500 hover:text-blue-800 mt-4"
+              class="inline-block align-baseline font-bold text-md text-blue-500 hover:text-blue-800 mt-4"
               :to="{ name: 'register' }"
             >
              SignUp
@@ -69,20 +69,39 @@
   </template>
   
   <script>
-  export default {
-    name: "Login",
-    data() {
-      return {
-        email: "",
-        password: "",
-      };
-    },
-    methods: {
-      login() {
-        console.log("logging in");
-      },
-    },
-  };
-  </script>
-  
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const router = useRouter();
+    const email = ref('');
+    const password = ref('');
+
+    const login = async () => {
+      
+      try {
+        const response = await axios.post('http://localhost:4000/api/users/login/', {
+          email: email.value,
+          password: password.value
+        });
+
+        console.log(response.data);
+        localStorage.setItem('token', response.data.token);
+        alert('Login successful');
+        router.push({ name: 'home' });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    return {
+      email,
+      password,
+      login
+    };
+  }
+};
+</script>
   
