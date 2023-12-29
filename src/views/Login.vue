@@ -69,7 +69,7 @@ export default {
             localStorage.setItem("userInfo", JSON.stringify(response.data));
             alert("Login successful!");
             console.log(response.data);
-            this.$router.push("/");
+            this.$router.push({ name: "home" });
           } else {
             alert(response.data.info);
             console.log(response);

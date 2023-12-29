@@ -1,9 +1,18 @@
 <script setup>
-const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+import { ref } from 'vue'
+import { useJwt } from '@vueuse/integrations/useJwt'
 
+const token = JSON.parse(localStorage.getItem('userInfo')).access_token
+const encodedJwt = ref(token)
+const { header, payload } = useJwt(encodedJwt)
 </script>
 
 <template>
-Welcome {{ userInfo }}
+  <div>
+    <h2 v-if="loading">Loading...</h2>
+    <h2 v-else-if="error">Error: {{ error.message }}</h2>
+    <h2 v-else>Welcome  {{ payload.username }}</h2>
+  </div>
 </template>
+
 

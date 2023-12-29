@@ -17,7 +17,8 @@
 </template>
 
 <script setup>
-
+const user = JSON.parse(localStorage.getItem('userInfo'))
+console.log(user)
 const logout = () => {
   localStorage.removeItem('userInfo')
   alert('Logging out...');
