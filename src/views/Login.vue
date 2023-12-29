@@ -67,7 +67,7 @@ export default {
         .then((response) => {
           if (response.data.success === true) {
             localStorage.setItem("userInfo", JSON.stringify(response.data));
-            alert("Login successful!");
+            // alert("Login successful!");
             console.log(response.data);
             this.$router.push({ name: "home" });
           } else {
