@@ -9,7 +9,7 @@
         Login
       </router-link>
 
-      <router-link :to="{ name: 'register' }" @click="logout" class="inline-flex items-center px-2 h-full transition-colors hover:bg-purple-100 cursor-pointer">
+      <router-link :to="{ name: 'login' }" @click="logout" class="inline-flex items-center px-2 h-full transition-colors hover:bg-purple-100 cursor-pointer">
         Logout
       </router-link>
     </div>
@@ -17,8 +17,9 @@
 </template>
 
 <script setup>
+
 const logout = () => {
-  // Add your logout logic here
+  localStorage.removeItem('userInfo')
   alert('Logging out...');
 }
 </script>

@@ -1,7 +1,9 @@
 <script setup>
+const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
 </script>
 
 <template>
-Home page
+Welcome {{ userInfo }}
 </template>
 
