@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-center items-center mt-12">
       <div class="w-full max-w-[500px]">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="register">
 
             <div class="identity-input mb-4">
             <label
@@ -118,20 +118,45 @@
   </template>
   
   <script>
-  export default {
-    name: "SignUp",
-    data() {
+    import axios from "axios";
+    export default {
+      data(){
       return {
+        fullname: "",
+        username: "",
+        phone: "",
         email: "",
-        password: "",
-      };
+        password: ""
+      }
     },
     methods: {
-      signup() {
-        console.log("signing up");
-      },
-    },
-  };
+       register(){
+        axios.post("http://127.0.0.1:8000/register/",{
+          full_name:this.fullname,
+          username:this.username,
+          phone_number:this.phone,
+          email:this.email,
+          password:this.password
+        })
+        .then((response)=> {
+          if (response.data.success === true) {
+            alert('Registration successful')
+            console.log(response.data)
+            this.$router.push({name:'login'})
+          }else{
+            alert(response.data.info)
+            console.log(response)
+          }
+        })
+
+        .catch((error)=> {
+          // Handle login error, e.g. display an error message
+          console.error(error);
+        })
+
+       } 
+    }
+    }
   </script>
   
   
